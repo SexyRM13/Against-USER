@@ -55,7 +55,9 @@ void chassis_task(const void* argu)
   while (1)
   {
     //切换底盘状态
-    get_chassis_mode();
+    // get_chassis_mode();
+		chassis.last_mode = chassis.mode;
+		chassis.mode = CHASSIS_FOLLOW_GIMBAL;
 
     switch (chassis.mode)
     {
@@ -163,7 +165,7 @@ void get_chassis_mode(void)
 void chassis_pid_param_init(void)
 {
   //挂起底盘任务
-  osThreadSuspend(NULL);
+  // osThreadSuspend(NULL);
   
   //底盘PID参数设置
   for (int k = 0; k < 4; k++)
