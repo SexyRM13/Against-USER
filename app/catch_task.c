@@ -1,5 +1,6 @@
 #include "catch_task.h"
 #include "uart_device.h"
+#include "cmsis_os.h"
 
 void catch_task(const void* argu) {
     // 初始化PWM输出参数
@@ -10,6 +11,8 @@ void catch_task(const void* argu) {
     start_pwm_output(PWM_MOTOR_A);
     start_pwm_output(PWM_MOTOR_B);
 
+    // 夹持任务
+    uint32_t catch_wake_time = osKernelSysTick();
     while(1) {
         // 收回
         if(rc.sw1 == RC_DN) {
@@ -20,7 +23,8 @@ void catch_task(const void* argu) {
         } else {
             set_pwm_param(PWM_MOTOR_A, 1760);
             set_pwm_param(PWM_MOTOR_B, 1760);
-            
         }
+
+        osDelayUntil(&catch_wake_time, CATCH_PERIOD);
     }
 }
