@@ -55,9 +55,7 @@ void chassis_task(const void* argu)
   while (1)
   {
     //切换底盘状态
-    // get_chassis_mode();
-		chassis.last_mode = chassis.mode;
-		chassis.mode = CHASSIS_FOLLOW_GIMBAL;
+    get_chassis_mode();
 
     switch (chassis.mode)
     {
@@ -90,7 +88,6 @@ void chassis_task(const void* argu)
       }break;
 
       //底盘保持静止锁死不动
-      // TODO: 检查chassis.mode的值与rc.sw2的值是否匹配，chassis值为零可能跟此分支被执行有关
       default:
       {
         chassis.vy = 0;
