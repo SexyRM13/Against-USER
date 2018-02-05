@@ -13,13 +13,13 @@ void catch_task(const void* argu) {
     while(1) {
         // 收回
         if(rc.sw1 == RC_DN) {
-            set_pwm_param(PWM_MOTOR_A, 2000);
-            set_pwm_param(PWM_MOTOR_B, 2000);
+            set_pwm_param(PWM_MOTOR_A, 1950);
+            set_pwm_param(PWM_MOTOR_B, 1950);
 
         // 伸出
         } else {
-            set_pwm_param(PWM_MOTOR_A, 1700);
-            set_pwm_param(PWM_MOTOR_B, 1700);
+            set_pwm_param(PWM_MOTOR_A, 1760);
+            set_pwm_param(PWM_MOTOR_B, 1760);
             
         }
     }
