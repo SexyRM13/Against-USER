@@ -124,7 +124,8 @@ void get_chassis_mode(void)
     break;
     
     case RC_MI:
-      chassis.mode = CHASSIS_OPEN_LOOP;
+      // chassis.mode = CHASSIS_OPEN_LOOP;
+      chassis.mode = CHASSIS_TWIST;
     break;
 
     case RC_DN:
