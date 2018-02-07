@@ -51,12 +51,18 @@ void gimbal_yaw_control(void)
  //yaw轴的角度累加，单位degree
   yaw_angle_ref += -rc.ch3 * RC_RATIO * GIMBAL_RC_MOVE_RATIO_YAW
                    -rc.mouse.x * KB_RATIO * GIMBAL_PC_MOVE_RATIO_YAW;
+  //以下为自瞄开关快捷键测试
+  // if(rc.sw1 == RC_DN)
+  //   yaw_angle_ref += mf.vyaw;
 }
 void gimbal_pitch_control(void)
 {
-  //pitch轴的角度累加，单位degree
+  //pitch轴的角度累加，单e位degree
   pit_angle_ref += rc.ch4 * RC_RATIO * GIMBAL_RC_MOVE_RATIO_PIT
                  - rc.mouse.y * KB_RATIO * GIMBAL_PC_MOVE_RATIO_PIT;
+  //以下为自瞄开关快捷键测试
+  // if(rc.sw1 == RC_DN)
+  //   pit_angle_ref += mf.vpitch;
 }
 
 
