@@ -146,6 +146,9 @@
 #define MAX_DMA_COUNT        200
 #define DBUS_FRAME_SIZE      18
 
+// Manifold数据相关
+#define MF_DBUS_FRAME_SIZE   4
+
 /* 常用的一些物理系数 */
 /* 角度转弧度系数 */
 #define RADIAN_COEF          57.3f

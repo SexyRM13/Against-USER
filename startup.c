@@ -30,6 +30,7 @@
 #include "startup.h"
 #include "can_device.h"
 #include "uart_device.h"
+#include "manifold_device.h"
 #include "calibrate.h"
 #include "sys.h"
 
@@ -63,6 +64,13 @@ void init_setup(void)
   uart_recv_callback_register(DBUS_UART, dbus_uart_callback);
   //开启遥控器接收
   uart_receive_start(DBUS_UART, dbus_recv, DBUS_FRAME_SIZE);
+
+  // 初始化Manifold通信串口
+  uart_init(USER_UART2, 100000, WORD_LEN_8B, STOP_BITS_1, PARITY_EVEN);
+  // 注册Manifold接收数据回调函数
+  uart_recv_callback_register(USER_UART2, mf_dbus_uart_callback);
+  // 开启Manifold数据接收
+  uart_receive_start(USER_UART2, mf_dbus_buffer, MF_DBUS_FRAME_SIZE);
   
   //初始化 CAN 设备
   can_device_init();
