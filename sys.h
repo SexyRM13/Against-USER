@@ -147,7 +147,7 @@
 #define DBUS_FRAME_SIZE      18
 
 // Manifold数据相关
-#define MF_DBUS_FRAME_SIZE   4
+#define MF_DBUS_FRAME_SIZE   8
 
 /* 常用的一些物理系数 */
 /* 角度转弧度系数 */

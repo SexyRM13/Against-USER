@@ -35,6 +35,7 @@
 #include "detect_task.h"
 #include "gimbal_task.h"
 #include "catch_task.h"
+#include "autoaim_task.h"
 #include "cmsis_os.h"
 
 /**
@@ -45,7 +46,7 @@
 // #define USER_TASK2 gimbal_task
 // #define USER_TASK3 detect_task
 #define USER_TASK4 catch_task
-// #define USER_TASK5
+#define USER_TASK5 autoaim_task
 
 /**
   * @brief     在任务函数执行前运行，可以用来初始化任务中用到的 IO 端口，
