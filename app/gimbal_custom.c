@@ -32,6 +32,7 @@
 #include "gimbal_task.h"
 #include "can_device.h"
 #include "uart_device.h"
+#include "manifold_device.h"
 #include "pid.h"
 #include "sys.h"
 
@@ -45,18 +46,36 @@ float pit_speed_ref;
 int16_t yaw_moto_current;
 int16_t pit_moto_current;
 
+// 获取自动瞄准云台yaw轴偏转角度
+float get_manifold_yaw(void) {
+  if(rc.sw1 == RC_UP) {
+    return mf.vyaw();
+  } 
+  return 0.0f;
+}
+
+// 获取自动瞄准云台pitch轴偏转角度
+float get_manifold_pitch(void) {
+  if(rc.sw1 == RC_UP) {
+    return mf.vpitch();
+  } 
+  return 0.0f;
+}
+
 /* 云台控制信号获取，将输入信号积分成云台的角度degree */
 void gimbal_yaw_control(void)
 {
  //yaw轴的角度累加，单位degree
-  yaw_angle_ref += -rc.ch3 * RC_RATIO * GIMBAL_RC_MOVE_RATIO_YAW
-                   -rc.mouse.x * KB_RATIO * GIMBAL_PC_MOVE_RATIO_YAW;
+  yaw_angle_ref += - rc.ch3 * RC_RATIO * GIMBAL_RC_MOVE_RATIO_YAW
+                   - rc.mouse.x * KB_RATIO * GIMBAL_PC_MOVE_RATIO_YAW
+                   - get_manifold_yaw();
 }
 void gimbal_pitch_control(void)
 {
   //pitch轴的角度累加，单位degree
   pit_angle_ref += rc.ch4 * RC_RATIO * GIMBAL_RC_MOVE_RATIO_PIT
-                 - rc.mouse.y * KB_RATIO * GIMBAL_PC_MOVE_RATIO_PIT;
+                 - rc.mouse.y * KB_RATIO * GIMBAL_PC_MOVE_RATIO_PIT
+                 - get_manifold_pitch();
 }
 
 
